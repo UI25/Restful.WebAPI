@@ -1,0 +1,41 @@
+version: '3.4'
+
+services: 
+  webapi:
+    container_name: WebAPI
+    image: ${DOCKER_REGISTRY-}webapi
+    build:
+      context: .
+      dockerfile: src/API/Dockerfile
+    tty: true
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=https://localhost:7001
+      - ASPNETCORE_Kestrel__Certificates__Default__Password=Qwe123asd
+      - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/aspnetapp.pfx 
+    ports:
+      - 7001:443
+    volumes:
+      - ~/.aspnet/https:/https:ro
+    depends_on:
+      - sqlserver
+  sqlserver:
+    container_name: SQLSERVER2022
+    image: ${DOCKER_REGISTRY-}sqlserver2022
+    user: root
+ #   environment:
+ #     ACCEPT_EULA: "Y"
+ #    MSSQL_SA_PASSWORD: Sygzalp09102016..
+    build:
+      context: .
+      dockerfile: data/Dockerfile
+ #   ports:
+ #    - 1433:1433 
+    volumes:
+      - /var/opt/mssql/data 
+    restart: always
+  
+
+
+  
+    

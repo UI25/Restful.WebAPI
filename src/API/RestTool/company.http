@@ -1,0 +1,34 @@
+# For more info on HTTP files go to https://aka.ms/vs/httpfile
+@hostname = localhost
+@port = 5004
+@url = https://{{hostname}}:{{port}}/api/Company
+@id = 417738A1-A5ED-4118-8525-46710D017F08
+
+#Get Company All
+GET {{url}}/GetCompanyAll
+
+###
+GET {{url}}/GetCompanyById/{{id}} 
+
+###
+POST {{url}}/InsertCompany
+Content-Type: application/json
+
+{
+    "name" : "IT_Solutions Ltd",
+    "address" : "584 Wall Dr. Gwynn Oak, MD 21207",
+    "country" : "USA"
+}
+
+###
+PUT {{url}}/UpdateCompany/{{id}}
+Content-Type: application/json
+
+{
+    "name" : "IT_Solutions Ltd",
+    "address" : "585 Wall Dr. Gwynn Oak, MD 21207",
+    "country" : "TR"
+}
+
+###
+DELETE {{url}}/DeleteCompany/{{id}}

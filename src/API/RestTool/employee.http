@@ -1,0 +1,14 @@
+# For more info on HTTP files go to https://aka.ms/vs/httpfile
+@hostname = localhost
+@port = 5004
+@url = https://{{hostname}}:{{port}}/api/Employee
+@id = 80ABBCA8-664D-4B20-B5DE-024705497D4A
+
+## Get Employee All
+GET {{url}}/GetEmployeeAll
+
+##Get Employee
+GET {{url}}/GetEmployeeById/{{id}}
+
+#Post Employee Saved
+POST
