@@ -13,9 +13,12 @@ using WebAPIRepository.Managers.V1;
 var builder = WebApplication.CreateBuilder(args);
 IConfiguration Configuration = builder.Configuration;
 
+#region Services
 builder.Services.AddControllersWithViews();
 builder.Services.AddEndpointsApiExplorer();
+#endregion
 
+#region AuthenticationService
 //This Method use IdentityServer JWT Cofiguration
 builder.Services.AddAuthentication("Bearer")
     .AddJwtBearer("Bearer", options =>
@@ -26,7 +29,9 @@ builder.Services.AddAuthentication("Bearer")
             ValidateAudience = false
         };
     });
-//End        
+#endregion      
+
+#region APISwagger 
 //Swagger Versioning Configuration
 builder.Services.AddApiVersioning(opt =>
 {
@@ -35,6 +40,19 @@ builder.Services.AddApiVersioning(opt =>
     opt.ReportApiVersions = true;
     opt.ApiVersionReader = new HeaderApiVersionReader("api-verison");
 });
+builder.Services.AddSwaggerGen(options =>
+{
+    options.SwaggerDoc("v1", new OpenApiInfo
+    {
+        Version = "v1",
+        Title = "Employee WebAPI",
+        Description = "An ASP.NET Core Web API for managing Employee items"
+    });
+    //options.SwaggerDoc("v2", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "Employee WebAPI", Version = "v2" });
+});
+#endregion
+
+#region CorsSetting 
 //Cors Service Configuration
 builder.Services.AddCors(options =>
 {
@@ -49,26 +67,9 @@ builder.Services.AddCors(options =>
                     });
 
 });
-//End
-//Swagger Versioning Configuration
-builder.Services.AddSwaggerGen(options =>
-{
-    options.SwaggerDoc("v1", new OpenApiInfo
-    {
-        Version = "v1",
-        Title = "Employee WebAPI",
-        Description = "An ASP.NET Core Web API for managing Employee items"
-    });
-    //options.SwaggerDoc("v2", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "Employee WebAPI", Version = "v2" });
-});
-//End
-//AutoMapper Configuration
-builder.Services.AddAutoMapper(cfg =>
-{
-    cfg.AddProfile<EmployeeProfile>();
-    cfg.AddProfile<CompanyProfile>();
-});
-//End
+#endregion
+
+#region  Databese&Scope
 //DB Connection
 builder.Services.AddDbContext<WebAPIDbContext>(options =>
     options.UseSqlServer(Configuration.GetConnectionString("WebAPIDB"), b =>
@@ -76,6 +77,14 @@ builder.Services.AddDbContext<WebAPIDbContext>(options =>
 
 builder.Services.AddTransient<ICompanyRepository, CompanyRepository>();
 builder.Services.AddTransient<IEmployeeRepository, EmployeeRepository>();
+#endregion
+
+//AutoMapper Configuration
+builder.Services.AddAutoMapper(cfg =>
+{
+    cfg.AddProfile<EmployeeProfile>();
+    cfg.AddProfile<CompanyProfile>();
+});
 
 var app = builder.Build();
 
@@ -89,6 +98,8 @@ if (app.Environment.IsDevelopment())
         //s.SwaggerEndpoint("/swagger/v2/swagger.json", "Employee WebAPI v2");
     });
 }
+
+//This is migrate to database 
 using(var scope= app.Services.CreateScope())
 {
     var db=scope.ServiceProvider.GetRequiredService<WebAPIDbContext>();
