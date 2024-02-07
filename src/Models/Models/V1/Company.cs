@@ -9,12 +9,8 @@ using Microsoft.EntityFrameworkCore;
 
 namespace WebAPIModels.Models.V1
 {
-    public class Company
-    {
-        [Column("CompanyId")]
-        [Key]
-        [Required]
-        public required Guid Id { get; set; }
+    public class Company : EntityBase
+    {        
         [Required(ErrorMessage = "Company name is a required field.")]
         [MaxLength(60, ErrorMessage = "Maximum length for the Name is 60 characters.")]
         public string? Name { get; set; }
@@ -22,6 +18,7 @@ namespace WebAPIModels.Models.V1
         [MaxLength(60, ErrorMessage = "Maximum length for rhe Address is 60 characte")]
         public string? Address { get; set; }
         public string? Country { get; set; }
+        
         public ICollection<Employee>? Employees { get; set; }
     }
 
