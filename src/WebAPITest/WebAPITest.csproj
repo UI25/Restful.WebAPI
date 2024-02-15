@@ -28,6 +28,7 @@
     <ProjectReference Include="..\API\WebAPI.csproj" />
     <ProjectReference Include="..\Models\WebAPIModels.csproj" />
     <ProjectReference Include="..\Repository\WebAPIRepository.csproj" />
+    <ProjectReference Include="..\WebAPI.ModelsDto\WebAPI.ModelsDto.csproj" />
   </ItemGroup>
 
 </Project>

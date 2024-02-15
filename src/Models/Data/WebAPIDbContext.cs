@@ -22,12 +22,12 @@ namespace WebAPIModels.Data
         }     
         public DbSet<Company> Companies { get; set; }
         public DbSet<Employee> Employees { get; set; }        
-        public DbSet<EmployeesView> EmployeesViews { get; set; }
+
 
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Data Source=SQLSERVER2022;Initial Catalog=WebAPI;Persist Security Info=True;TrustServerCertificate=True;User ID=SA; Password=SqlServer123123..;");         
+            optionsBuilder.UseSqlServer("Data Source=SQLSERVER2022;Initial Catalog=WebAPI;Persist Security Info=True;TrustServerCertificate=True;User ID=SA; Password=Sql123123..;");         
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -40,12 +40,6 @@ namespace WebAPIModels.Data
                  .WithOne(x => x.Company)
                  .HasForeignKey(x => x.CompanyId)
                  .IsRequired();
- 
-            base.OnModelCreating(modelBuilder);
-                modelBuilder
-                    .Entity<EmployeesView>()
-                    .ToView(nameof(EmployeesViews))
-                    .HasKey(t => t.EmployeeId);
         }
 
     }
@@ -56,7 +50,7 @@ namespace WebAPIModels.Data
         public WebAPIDbContext CreateDbContext(string[] args)
         {
             var optionsBuilder = new DbContextOptionsBuilder<WebAPIDbContext>();
-            optionsBuilder.UseSqlServer("Data Source=SQLSERVER2022;Initial Catalog=WebAPI;Persist Security Info=True;TrustServerCertificate=True;User ID=SA; Password=SqlServer123123..;");
+            optionsBuilder.UseSqlServer("Data Source=SQLSERVER2022;Initial Catalog=WebAPI;Persist Security Info=True;TrustServerCertificate=True;User ID=SA; Password=Sql123123..;");
 
             return new WebAPIDbContext(optionsBuilder.Options);
         }

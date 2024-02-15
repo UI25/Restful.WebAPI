@@ -21,18 +21,17 @@ services:
       - sqlserver
   sqlserver:
     container_name: SQLSERVER2022
-    image: ${DOCKER_REGISTRY-}sqlserver2022
+    image: mcr.microsoft.com/mssql/server:2022-latest
     user: root
- #   environment:
- #     ACCEPT_EULA: "Y"
- #    MSSQL_SA_PASSWORD: Sygzalp09102016..
-    build:
-      context: .
-      dockerfile: data/Dockerfile
- #   ports:
- #    - 1433:1433 
+    environment:
+      - ACCEPT_EULA=Y
+      - MSSQL_PID=Developer
+      - MSSQL_SA_PASSWORD=Sql123123..
+    ports:
+     - 1433:1433 
     volumes:
-      - /var/opt/mssql/data 
+      - /var/opt/mssql/data
+    command: /bin/sh -c "(/opt/mssql/bin/sqlservr &) && sleep 10s && /opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P Sql123123.. -d master -Q 'CREATE DATABASE [WebAPI]' && sleep infinity"
     restart: always
   
 

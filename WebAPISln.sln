@@ -13,6 +13,8 @@ Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-co
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebAPITest", "src\WebAPITest\WebAPITest.csproj", "{386FB1E9-E680-4074-A064-F12809BA72B6}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebAPI.ModelsDto", "src\WebAPI.ModelsDto\WebAPI.ModelsDto.csproj", "{AF760DD8-4344-486F-92D9-2224214997E4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{386FB1E9-E680-4074-A064-F12809BA72B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{386FB1E9-E680-4074-A064-F12809BA72B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{386FB1E9-E680-4074-A064-F12809BA72B6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AF760DD8-4344-486F-92D9-2224214997E4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AF760DD8-4344-486F-92D9-2224214997E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AF760DD8-4344-486F-92D9-2224214997E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AF760DD8-4344-486F-92D9-2224214997E4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
