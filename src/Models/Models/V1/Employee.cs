@@ -9,9 +9,14 @@ using System.Text.Json.Serialization;
 
 namespace WebAPIModels.Models.V1
 {
+<<<<<<< HEAD
     public class Employee : BaseEntity
     {
 
+=======
+    public class Employee : EntityBase
+    {
+>>>>>>> 18e5f3668b7ada15b32d5851ad6617ce0bb3c487
         [Required(ErrorMessage = "Employee name is a required field.")]
         [MaxLength(30, ErrorMessage = "Maximum length for the Name is 30 characters.")]
         public string Name { get; set; }
